@@ -9,6 +9,9 @@
     <description>聚合服务</description>
 
     <packaging>pom</packaging>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
     <modules>
         <module>paulsonmall-coupon</module>
@@ -16,5 +19,8 @@
         <module>paulsonmall-order</module>
         <module>paulsonmall-product</module>
         <module>paulsonmall-ware</module>
+        <module>renren-fast</module>
+        <module>renren-generator</module>
+        <module>paulsonmall-common</module>
     </modules>
 </project>
