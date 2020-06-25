@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import com.ybs.paulsonmall.coupon.entity.CouponEntity;
@@ -11,6 +13,7 @@ import com.ybs.paulsonmall.coupon.service.CouponService;
 import com.ybs.common.utils.PageUtils;
 import com.ybs.common.utils.R;
 
+import static rx.schedulers.Schedulers.test;
 
 
 /**
@@ -20,11 +23,24 @@ import com.ybs.common.utils.R;
  * @email ybsdeyx@foxmail.com
  * @date 2020-06-25 12:55:45
  */
+@RefreshScope
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
+
+    @Value("${coupon.user.name}")
+    private String name;
+
+    @Value("${coupon.user.age}")
+    private Integer age;
+
+    @GetMapping("/test")
+    public R test() {
+        System.out.println("config name"+name);
+        return R.ok().put("name", name).put("age", age);
+    }
 
     @GetMapping("/member/list")
     public R membercoupons() {
