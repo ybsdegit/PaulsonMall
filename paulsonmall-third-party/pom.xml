@@ -9,18 +9,17 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ybs.paulsonmall</groupId>
-    <artifactId>paulsonmall-product</artifactId>
+    <artifactId>paulsonmall-third-party</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>paulsonmall-product</name>
-    <description>商城商品服务</description>
+    <name>paulsonmall-third-party</name>
+    <description>第三方服务</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.ybs.paulsonmall</groupId>
             <artifactId>paulsonmall-common</artifactId>
@@ -34,11 +33,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!--<dependency>-->
-        <!--    <groupId>com.aliyun.oss</groupId>-->
-        <!--    <artifactId>aliyun-sdk-oss</artifactId>-->
-        <!--    <version>3.8.0</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alicloud-oss</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -58,6 +56,13 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

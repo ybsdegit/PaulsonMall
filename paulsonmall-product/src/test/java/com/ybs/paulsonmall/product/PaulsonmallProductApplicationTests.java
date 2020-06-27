@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @SpringBootTest
@@ -15,8 +16,26 @@ class PaulsonmallProductApplicationTests {
     @Autowired
     private BrandService brandService;
 
+    // @Autowired
+    // private OSSClient ossClient;
+    
+    // @Test
+    // void testUpload1() throws FileNotFoundException {
+    //     InputStream inputStream = new FileInputStream("D:\\B01.jpeg");
+    //     ossClient.putObject("paulsonmall", "B01.jpeg", inputStream);
+    //     System.out.println("上传完成");
+    // }
+
     @Test
-    void contextLoads() {
+    void testUpload() throws FileNotFoundException {
+        // String endpoint = "oss-cn-beijing.aliyuncs.com";
+        // String accessKeyId = "LTAI4G9RMM8hou2KsAPGraBR";
+        // String accessKeySecret = "vD6l6jX0i7MLBilM1X67yMBgU8dVfN";
+        // OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        // InputStream inputStream = new FileInputStream("D:\\B01.jpeg");
+        // ossClient.putObject("paulsonmall", "B01.jpeg", inputStream);
+        // ossClient.shutdown();
+        // System.out.println("上传完成");
     }
 
     // @Test
@@ -42,9 +61,8 @@ class PaulsonmallProductApplicationTests {
         List<BrandEntity> list = brandService.list(new QueryWrapper<BrandEntity>().eq("brand_id", 1L));
         list.forEach(item -> {
             System.out.println(item);
-        } );
+        });
     }
-
 
 
 }
