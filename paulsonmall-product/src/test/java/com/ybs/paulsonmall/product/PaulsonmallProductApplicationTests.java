@@ -18,7 +18,7 @@ class PaulsonmallProductApplicationTests {
 
     // @Autowired
     // private OSSClient ossClient;
-    
+
     // @Test
     // void testUpload1() throws FileNotFoundException {
     //     InputStream inputStream = new FileInputStream("D:\\B01.jpeg");
@@ -28,14 +28,7 @@ class PaulsonmallProductApplicationTests {
 
     @Test
     void testUpload() throws FileNotFoundException {
-        // String endpoint = "oss-cn-beijing.aliyuncs.com";
-        // String accessKeyId = "LTAI4G9RMM8hou2KsAPGraBR";
-        // String accessKeySecret = "vD6l6jX0i7MLBilM1X67yMBgU8dVfN";
-        // OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
-        // InputStream inputStream = new FileInputStream("D:\\B01.jpeg");
-        // ossClient.putObject("paulsonmall", "B01.jpeg", inputStream);
-        // ossClient.shutdown();
-        // System.out.println("上传完成");
+        
     }
 
     // @Test
