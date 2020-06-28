@@ -2,8 +2,8 @@ package com.ybs.paulsonmall.product.controller;
 
 import com.ybs.common.utils.PageUtils;
 import com.ybs.common.utils.R;
-import com.ybs.paulsonmall.product.entity.AttrEntity;
 import com.ybs.paulsonmall.product.service.AttrService;
+import com.ybs.paulsonmall.product.vo.AttrRespVo;
 import com.ybs.paulsonmall.product.vo.AttrVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,8 +50,8 @@ public class AttrController {
     @RequestMapping("/info/{attrId}")
     // @RequiresPermissions("product:attr:info")
     public R info(@PathVariable("attrId") Long attrId) {
-        AttrEntity attr = attrService.getById(attrId);
-
+        // AttrEntity attr = attrService.getById(attrId);
+        AttrRespVo attr = attrService.getAttrInfo(attrId);
         return R.ok().put("attr", attr);
     }
 
@@ -70,8 +70,9 @@ public class AttrController {
      */
     @RequestMapping("/update")
     // @RequiresPermissions("product:attr:update")
-    public R update(@RequestBody AttrEntity attr) {
-        attrService.updateById(attr);
+    public R update(@RequestBody AttrVo attr) {
+        // attrService.updateById(attr);
+        attrService.updateAttr(attr);
 
         return R.ok();
     }

@@ -3,6 +3,7 @@ package com.ybs.paulsonmall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ybs.common.utils.PageUtils;
 import com.ybs.paulsonmall.product.entity.AttrEntity;
+import com.ybs.paulsonmall.product.vo.AttrRespVo;
 import com.ybs.paulsonmall.product.vo.AttrVo;
 
 import java.util.Map;
@@ -21,5 +22,9 @@ public interface AttrService extends IService<AttrEntity> {
     void saveAttr(AttrVo attrVo);
 
     PageUtils queryBaseAttrPage(Map<String, Object> params, Long catelogId);
+
+    AttrRespVo getAttrInfo(Long attrId);
+
+    void updateAttr(AttrVo attr);
 }
 
