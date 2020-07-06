@@ -50,6 +50,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public R handler(RuntimeException e) {
         log.error("运行时异常[{}], 异常类型[{}]", e.getMessage(), e.getClass());
+        log.error(e.toString());
         return R.error(e.getMessage());
     }
 

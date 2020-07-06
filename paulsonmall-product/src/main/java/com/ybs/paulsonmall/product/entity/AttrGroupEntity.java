@@ -10,9 +10,9 @@ import java.io.Serializable;
 /**
  * 属性分组
  *
- * @author Paulson
- * @email ybsdeyx@foxmail.com
- * @date 2020-06-25 01:09:30
+ * @author leifengyang
+ * @email leifengyang@gmail.com
+ * @date 2019-10-01 21:08:49
  */
 @Data
 @TableName("pms_attr_group")
@@ -45,7 +45,9 @@ public class AttrGroupEntity implements Serializable {
      */
     private Long catelogId;
 
+
     @TableField(exist = false)
     private Long[] catelogPath;
+
 
 }
