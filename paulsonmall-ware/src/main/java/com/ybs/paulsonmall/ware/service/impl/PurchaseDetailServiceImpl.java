@@ -11,6 +11,7 @@ import com.ybs.paulsonmall.ware.service.PurchaseDetailService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -55,12 +56,13 @@ public class PurchaseDetailServiceImpl extends ServiceImpl<PurchaseDetailDao, Pu
         return new PageUtils(page);
     }
 
-    // @Override
-    // public List<PurchaseDetailEntity> listDetailByPurchaseId(Long id) {
-    //
-    //     List<PurchaseDetailEntity> purchaseId = this.list(new QueryWrapper<PurchaseDetailEntity>().eq("purchase_id", id));
-    //
-    //     return purchaseId;
-    // }
+
+    @Override
+    public List<PurchaseDetailEntity> listDetailByPurchaseId(Long id) {
+
+        List<PurchaseDetailEntity> purchaseId = this.list(new QueryWrapper<PurchaseDetailEntity>().eq("purchase_id", id));
+
+        return purchaseId;
+    }
 
 }
