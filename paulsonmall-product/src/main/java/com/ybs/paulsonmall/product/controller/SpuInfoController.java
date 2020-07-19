@@ -25,11 +25,16 @@ public class SpuInfoController {
     @Autowired
     private SpuInfoService spuInfoService;
 
+    @RequestMapping("/{spuId}/up")
+    public R spuUp(@PathVariable Long spuId) {
+        spuInfoService.up(spuId);
+        return R.ok();
+    }
+
     /**
      * 列表
      */
     @RequestMapping("/list")
-    //@RequiresPermissions("product:spuinfo:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = spuInfoService.queryPageByCondition(params);
 
@@ -41,7 +46,6 @@ public class SpuInfoController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    //@RequiresPermissions("product:spuinfo:info")
     public R info(@PathVariable("id") Long id) {
         SpuInfoEntity spuInfo = spuInfoService.getById(id);
 
@@ -52,10 +56,7 @@ public class SpuInfoController {
      * 保存
      */
     @RequestMapping("/save")
-    //@RequiresPermissions("product:spuinfo:save")
     public R save(@RequestBody SpuSaveVo vo) {
-        //spuInfoService.save(spuInfo);
-
         spuInfoService.saveSpuInfo(vo);
 
         return R.ok();
@@ -65,7 +66,6 @@ public class SpuInfoController {
      * 修改
      */
     @RequestMapping("/update")
-    //@RequiresPermissions("product:spuinfo:update")
     public R update(@RequestBody SpuInfoEntity spuInfo) {
         spuInfoService.updateById(spuInfo);
 
@@ -76,10 +76,8 @@ public class SpuInfoController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("product:spuinfo:delete")
     public R delete(@RequestBody Long[] ids) {
         spuInfoService.removeByIds(Arrays.asList(ids));
-
         return R.ok();
     }
 

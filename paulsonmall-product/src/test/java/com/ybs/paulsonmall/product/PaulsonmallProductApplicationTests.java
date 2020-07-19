@@ -1,7 +1,9 @@
 package com.ybs.paulsonmall.product;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.ybs.common.utils.R;
 import com.ybs.paulsonmall.product.entity.BrandEntity;
+import com.ybs.paulsonmall.product.feign.SearchFeignService;
 import com.ybs.paulsonmall.product.service.BrandService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,15 @@ class PaulsonmallProductApplicationTests {
     @Autowired
     private BrandService brandService;
 
+    @Autowired
+    SearchFeignService searchFeignService;
+
+    @Test
+    void test01() {
+        R test = searchFeignService.test();
+        System.out.println(test.toString());
+    }
+
     // @Autowired
     // private OSSClient ossClient;
 
@@ -28,7 +39,7 @@ class PaulsonmallProductApplicationTests {
 
     @Test
     void testUpload() throws FileNotFoundException {
-        
+
     }
 
     // @Test
