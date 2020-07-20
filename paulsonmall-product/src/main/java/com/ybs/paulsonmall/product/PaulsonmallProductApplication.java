@@ -10,6 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * 整合mybatis-plus
  */
 
+
 @MapperScan("com.ybs.paulsonmall.product.dao")
 @EnableDiscoveryClient
 @SpringBootApplication

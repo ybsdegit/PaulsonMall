@@ -12,7 +12,11 @@ import com.ybs.paulsonmall.product.entity.CategoryEntity;
 import com.ybs.paulsonmall.product.service.CategoryBrandRelationService;
 import com.ybs.paulsonmall.product.service.CategoryService;
 import com.ybs.paulsonmall.product.vo.Catalog2Vo;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +31,9 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
 
     // private Map<String, Object> cache = new HashMap<>();
+
+    @Autowired
+    RedissonClient redisson;
 
     @Autowired
     RedisTemplate<String, String> redisTemplate;
@@ -78,6 +85,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return paths.toArray(new Long[parentPath.size()]);
     }
 
+    @CacheEvict(value = "category", key = "'getLevel1Categorys'")
     @Transactional
     @Override
     public void updateDetail(CategoryEntity category) {
@@ -87,13 +95,15 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     }
 
     @Override
+    @Cacheable(value = {"category"}, key = "#root.method.name")
     public List<CategoryEntity> getLevel1Categorys() {
+        System.out.println("getLevel1Categorys.................");
         return baseMapper.selectList(new QueryWrapper<CategoryEntity>().eq("parent_cid", 0));
     }
 
     @Override
     public Map<String, List<Catalog2Vo>> getCateLogJson() {
-        /**
+        /*
          * 1、共结果缓存：解决缓存穿透
          * 2、设置过期时间（加随机值）：解决缓存雪崩
          * 3、加锁：解决缓存击穿
@@ -105,10 +115,23 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
             });
             return cateLogJsonFromDb;
         }
-        cateLogJsonFromDb = getCateLogJsonFromDb();
+        cateLogJsonFromDb = getCateLogJsonFromRedissonLock();
         redisTemplate.opsForValue().set("catalogJson", JSON.toJSONString(cateLogJsonFromDb), 1, TimeUnit.DAYS);
         return cateLogJsonFromDb;
 
+    }
+
+
+    public Map<String, List<Catalog2Vo>> getCateLogJsonFromRedissonLock() {
+        RLock lock = redisson.getLock("catalogJson-lock");
+        lock.lock();
+        Map<String, List<Catalog2Vo>> cateLogJsonFromDb;
+        try {
+            cateLogJsonFromDb = getCateLogJsonFromDb();
+        } finally {
+            lock.unlock();
+        }
+        return cateLogJsonFromDb;
     }
 
 

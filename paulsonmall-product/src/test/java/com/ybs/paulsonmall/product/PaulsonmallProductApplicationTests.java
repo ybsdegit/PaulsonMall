@@ -6,6 +6,7 @@ import com.ybs.paulsonmall.product.entity.BrandEntity;
 import com.ybs.paulsonmall.product.feign.SearchFeignService;
 import com.ybs.paulsonmall.product.service.BrandService;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,6 +21,14 @@ class PaulsonmallProductApplicationTests {
 
     @Autowired
     SearchFeignService searchFeignService;
+
+    @Autowired
+    private RedissonClient client;
+
+    @Test
+    void test022() {
+        System.out.println(client);
+    }
 
     @Test
     void test01() {
