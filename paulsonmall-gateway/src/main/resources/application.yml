@@ -16,7 +16,7 @@ spring:
         - id: product_route
           uri: lb://paulsonmall-product
           predicates:
-            - Path=/api/product/**
+            - Path=/api/product/**,/hello
           filters:
             - RewritePath=/api/(?<segment>/?.*),/$\{segment}
 
@@ -48,6 +48,10 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
 
+        - id: paulsonmall_host_router
+          uri: lb://paulsonmall-product
+          predicates:
+            - Host=**.paulsonmall.com,paulsonmall.com
 
 
 ## 前端项目

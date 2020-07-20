@@ -3,6 +3,7 @@ package com.ybs.paulsonmall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ybs.common.utils.PageUtils;
 import com.ybs.paulsonmall.product.entity.CategoryEntity;
+import com.ybs.paulsonmall.product.vo.Catalog2Vo;
 
 import java.util.List;
 import java.util.Map;
@@ -25,5 +26,9 @@ public interface CategoryService extends IService<CategoryEntity> {
     Long[] findCatelogPath(Long catelogId);
 
     void updateDetail(CategoryEntity category);
+
+    List<CategoryEntity> getLevel1Categorys();
+
+    Map<String, List<Catalog2Vo>> getCateLogJson();
 }
 

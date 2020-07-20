@@ -22,4 +22,4 @@ server:
 
 logging:
   level:
-    com.ybs.paulsonmall.product: debug
+    com.ybs.paulsonmall.product: error
